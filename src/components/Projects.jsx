@@ -7,28 +7,28 @@ const projects = [
     desc: 'Headless e‑commerce storefront with blazing fast UX.',
     tags: ['Next.js', 'Tailwind', 'Stripe'],
     link: '#',
-    gradient: 'from-indigo-500 via-fuchsia-500 to-emerald-400',
+    gradient: 'from-violet-500 via-indigo-500 to-blue-500',
   },
   {
     title: 'Vision Studio',
     desc: 'Interactive 3D portfolio with real‑time scenes.',
     tags: ['React', 'Spline', 'Framer Motion'],
     link: '#',
-    gradient: 'from-emerald-400 via-teal-400 to-cyan-500',
+    gradient: 'from-indigo-500 via-blue-500 to-cyan-500',
   },
   {
     title: 'Pulse Dashboard',
     desc: 'Analytics dashboard with live data and charts.',
     tags: ['Vite', 'Recharts', 'Radix UI'],
     link: '#',
-    gradient: 'from-fuchsia-500 via-pink-500 to-rose-500',
+    gradient: 'from-fuchsia-500 via-purple-500 to-violet-500',
   },
   {
     title: 'Atlas Docs',
     desc: 'Developer docs with instant search and MDX.',
     tags: ['Docusaurus', 'Algolia', 'MDX'],
     link: '#',
-    gradient: 'from-violet-500 via-purple-500 to-indigo-500',
+    gradient: 'from-violet-500 via-indigo-500 to-blue-500',
   },
   {
     title: 'Nimbus UI',
@@ -42,7 +42,7 @@ const projects = [
     desc: 'Realtime collaboration app with presence.',
     tags: ['Supabase', 'WebSockets', 'React'],
     link: '#',
-    gradient: 'from-amber-400 via-orange-500 to-rose-500',
+    gradient: 'from-indigo-500 via-fuchsia-500 to-rose-500',
   },
 ];
 
@@ -61,6 +61,8 @@ const item = {
 export default function Projects() {
   return (
     <section id="projects" className="relative py-24 sm:py-28">
+      {/* Section top fade for smooth transition from previous section */}
+      <div aria-hidden className="pointer-events-none absolute -top-16 left-0 right-0 h-16 bg-gradient-to-b from-transparent to-zinc-950/60" />
       <div className="absolute inset-0 -z-0 pointer-events-none bg-[radial-gradient(40rem_20rem_at_50%_-10%,rgba(99,102,241,0.12),transparent)]" />
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 relative">
         <div className="flex items-end justify-between gap-6">

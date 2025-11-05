@@ -29,21 +29,30 @@ export default function Hero() {
 
   return (
     <section id="home" className="relative min-h-[90vh] lg:min-h-screen overflow-hidden">
-      {/* Dark, futuristic Spline background */}
+      {/* Interactive Spline background (purple/blue on dark) */}
       <div className="absolute inset-0">
-        <Spline scene="https://prod.spline.design/t7ourXf4CdN9XTF3/scene.splinecode" style={{ width: '100%', height: '100%' }} />
+        <Spline scene="https://prod.spline.design/wwTRdG1D9CkNs368/scene.splinecode" style={{ width: '100%', height: '100%' }} />
       </div>
 
-      {/* Dark gradient veil that does not block interaction */}
-      <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-zinc-950/80 via-zinc-950/20 to-zinc-950/95" />
-      {/* Soft vignette for depth */}
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(60rem_30rem_at_50%_-10%,rgba(25,25,25,0.0),rgba(10,10,10,0.65))]" />
+      {/* Non-blocking gradient veil + vignette for depth */}
+      <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-zinc-950/70 via-zinc-950/10 to-zinc-950/90" />
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(70rem_35rem_at_50%_-10%,rgba(59,35,233,0.15),transparent)]" />
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(50rem_25rem_at_50%_110%,rgba(21,94,239,0.1),transparent)]" />
+
+      {/* Cursor-reactive glow hotspot (does not block interaction) */}
+      <motion.div
+        aria-hidden
+        className="pointer-events-none absolute -inset-20"
+        style={{ x: sx, y: sy }}
+      >
+        <div className="h-[120vh] w-[120vw] rounded-full bg-[radial-gradient(closest-side,rgba(91,33,182,0.18),rgba(14,0,36,0.0))] blur-3xl" />
+      </motion.div>
 
       {/* Content */}
       <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center pt-28 pb-16 lg:pt-40 lg:pb-32">
           <motion.div
-            className="lg:col-span-7 pointer-events-none"
+            className="lg:col-span-7"
             initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.85 }}
@@ -61,10 +70,10 @@ export default function Hero() {
               I design and build premium web interfaces with performance, accessibility, and delightful motion at the core.
             </p>
             <div className="mt-8 flex flex-wrap items-center gap-3">
-              <button onClick={scrollToProjects} className="pointer-events-auto rounded-full bg-white text-black px-6 py-3 text-sm font-semibold shadow hover:shadow-lg transition [transform:translateZ(0)] hover:-translate-y-0.5">
+              <button onClick={scrollToProjects} className="rounded-full bg-white text-black px-6 py-3 text-sm font-semibold shadow hover:shadow-lg transition [transform:translateZ(0)] hover:-translate-y-0.5">
                 View my projects
               </button>
-              <a href="#contact" className="pointer-events-auto rounded-full border border-white/20 px-6 py-3 text-sm font-semibold backdrop-blur hover:bg-white/10 transition">
+              <a href="#contact" className="rounded-full border border-white/20 px-6 py-3 text-sm font-semibold backdrop-blur hover:bg-white/10 transition">
                 Contact me
               </a>
             </div>
@@ -79,16 +88,6 @@ export default function Hero() {
           </motion.div>
         </div>
       </div>
-
-      {/* Floating aurora accents that follow the cursor (non-interfering) */}
-      <motion.div
-        className="pointer-events-none absolute inset-x-0 top-24 h-48"
-        style={{ x: sx, y: sy }}
-      >
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 h-full">
-          <div className="h-full rounded-3xl bg-gradient-to-r from-indigo-500/15 via-fuchsia-500/12 to-emerald-400/15 blur-2xl" />
-        </div>
-      </motion.div>
     </section>
   );
 }

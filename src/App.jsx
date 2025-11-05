@@ -20,6 +20,8 @@ function App() {
       <main>
         <Hero />
         <section id="about" className="relative py-24 sm:py-28">
+          {/* Gentle top fade from hero */}
+          <div aria-hidden className="pointer-events-none absolute -top-16 left-0 right-0 h-16 bg-gradient-to-b from-transparent to-zinc-950/60" />
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div className="grid grid-cols-1 md:grid-cols-12 gap-10 items-start">
               <div className="md:col-span-7">
@@ -35,7 +37,7 @@ function App() {
               </div>
               <div className="md:col-span-5">
                 <div className="relative overflow-hidden rounded-2xl border border-zinc-200 dark:border-zinc-800 bg-white/70 dark:bg-zinc-900/60 backdrop-blur p-6">
-                  <div className="absolute -top-24 -right-24 h-56 w-56 rounded-full bg-gradient-to-br from-indigo-500 via-fuchsia-500 to-emerald-400 opacity-30 blur-3xl" />
+                  <div className="absolute -top-24 -right-24 h-56 w-56 rounded-full bg-gradient-to-br from-violet-500 via-indigo-500 to-blue-500 opacity-30 blur-3xl" />
                   <h3 className="text-lg font-semibold">What I bring</h3>
                   <ul className="mt-4 space-y-3 text-sm text-zinc-700 dark:text-zinc-200 list-disc list-inside">
                     <li>Pixel‑perfect UI with scalable component systems</li>
