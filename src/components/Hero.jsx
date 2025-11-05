@@ -3,7 +3,7 @@ import Spline from '@splinetool/react-spline';
 import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion';
 
 export default function Hero() {
-  // Track pointer only for the hotspot glow (scene itself stays locked)
+  // Pointer used only for the hotspot glow (scene is visually locked)
   const [hovering, setHovering] = useState(false);
   const px = useMotionValue(0.5);
   const py = useMotionValue(0.5);
@@ -32,19 +32,19 @@ export default function Hero() {
     };
   }, [px, py]);
 
+  // Allow overriding the scene URL so we can easily restore the previous background.
+  const sceneUrl = import.meta.env.VITE_SPLINE_SCENE_URL || 'https://prod.spline.design/zhZFnwyOYLgqlLWk/scene.splinecode';
+
   return (
     <section ref={containerRef} className="relative h-screen w-full overflow-hidden bg-zinc-950 text-white">
-      {/* Attempt to hide Spline watermark overlay */}
+      {/* Hide Spline watermark overlay */}
       <style>{`
-        .spline-watermark, .spline-logo, a[aria-label="Made with Spline"] { display: none !important; }
+        .spline-watermark, .spline-logo, a[aria-label="Made with Spline"], [class*="watermark"] { display: none !important; }
       `}</style>
 
-      {/* 3D Scene (Cover) - locked (no parallax/rotation from our side) */}
-      <div className="absolute inset-0">
-        <Spline
-          scene="https://prod.spline.design/zhZFnwyOYLgqlLWk/scene.splinecode"
-          style={{ width: '100%', height: '100%' }}
-        />
+      {/* 3D Scene (Cover). Pointer events disabled to keep the scene locked. */}
+      <div className="absolute inset-0 pointer-events-none">
+        <Spline scene={sceneUrl} style={{ width: '100%', height: '100%' }} />
       </div>
 
       {/* Vignette + gradient overlays – non-blocking */}
