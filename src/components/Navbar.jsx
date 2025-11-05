@@ -1,9 +1,12 @@
 import { useEffect, useState } from 'react';
 import { Rocket, Menu, X } from 'lucide-react';
+import { motion, useScroll, useSpring } from 'framer-motion';
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
+  const { scrollYProgress } = useScroll();
+  const scaleX = useSpring(scrollYProgress, { stiffness: 120, damping: 20, mass: 0.4 });
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 10);
@@ -21,6 +24,9 @@ export default function Navbar() {
     <header className={`fixed top-0 left-0 right-0 z-40 transition-all ${
       scrolled ? 'backdrop-blur-md bg-white/60 dark:bg-zinc-900/60 shadow-sm' : 'bg-transparent'
     }`}>
+      {/* Scroll progress bar */}
+      <motion.div style={{ scaleX }} className="origin-left h-[2px] bg-gradient-to-r from-indigo-500 via-fuchsia-500 to-emerald-400" />
+
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex h-16 items-center justify-between">
           <a href="#home" className="flex items-center gap-2 font-semibold tracking-tight">

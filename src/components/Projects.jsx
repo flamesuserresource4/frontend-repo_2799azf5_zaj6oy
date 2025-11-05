@@ -46,6 +46,18 @@ const projects = [
   },
 ];
 
+const container = {
+  hidden: {},
+  show: {
+    transition: { staggerChildren: 0.08, delayChildren: 0.1 },
+  },
+};
+
+const item = {
+  hidden: { opacity: 0, y: 20, scale: 0.98 },
+  show: { opacity: 1, y: 0, scale: 1, transition: { type: 'spring', stiffness: 120, damping: 16 } },
+};
+
 export default function Projects() {
   return (
     <section id="projects" className="relative py-24 sm:py-28">
@@ -59,24 +71,33 @@ export default function Projects() {
           <a href="#contact" className="hidden sm:inline-flex rounded-full border border-zinc-300 dark:border-zinc-700 px-4 py-2 text-sm font-medium hover:bg-white/70 dark:hover:bg-zinc-900/60 backdrop-blur">Get in touch</a>
         </div>
 
-        <div className="mt-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {projects.map((p, i) => (
+        <motion.div
+          variants={container}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, amount: 0.15 }}
+          className="mt-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"
+        >
+          {projects.map((p) => (
             <motion.a
               key={p.title}
               href={p.link}
               target="_blank"
               rel="noreferrer"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.2 }}
-              transition={{ duration: 0.5, delay: i * 0.05 }}
-              className="group relative overflow-hidden rounded-2xl border border-zinc-200 dark:border-zinc-800 bg-white/70 dark:bg-zinc-900/60 backdrop-blur shadow-sm hover:shadow-md transition"
+              variants={item}
+              whileHover={{ y: -6, rotateX: 2, rotateY: -2 }}
+              whileTap={{ scale: 0.98 }}
+              className="group perspective-1000 relative overflow-hidden rounded-2xl border border-zinc-200 dark:border-zinc-800 bg-white/70 dark:bg-zinc-900/60 backdrop-blur shadow-sm transition will-change-transform"
             >
               <div className={`absolute -top-24 -right-24 h-56 w-56 rounded-full bg-gradient-to-br ${p.gradient} opacity-30 blur-3xl`} />
+              {/* Shine effect */}
+              <div className="pointer-events-none absolute inset-0 translate-x-[-200%] group-hover:translate-x-[200%] transition-transform duration-700">
+                <div className="h-full w-1/3 rotate-6 bg-gradient-to-r from-transparent via-white/50 to-transparent" />
+              </div>
               <div className="p-6 relative">
                 <div className="flex items-center justify-between gap-4">
                   <h3 className="text-xl font-semibold tracking-tight">{p.title}</h3>
-                  <span className="inline-flex h-9 w-9 items-center justify-center rounded-full bg-black text-white dark:bg-white dark:text-black shadow">
+                  <span className="inline-flex h-9 w-9 items-center justify-center rounded-full bg-black text-white dark:bg-white dark:text-black shadow group-hover:scale-105 transition">
                     <ExternalLink size={16} />
                   </span>
                 </div>
@@ -89,7 +110,7 @@ export default function Projects() {
               </div>
             </motion.a>
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   );
