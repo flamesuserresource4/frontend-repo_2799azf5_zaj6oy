@@ -1,20 +1,20 @@
 import React from 'react';
 
-const demoProjects = [
+const projects = [
   {
-    title: 'Portfolio Platform',
-    desc: 'Responsive, fast, and themed with liquid-glass UI accents.',
-    tag: 'Frontend',
+    title: 'TechSphere',
+    desc: 'A clean, modern landing page showcasing tech products and services with interactive elements.',
+    tag: 'Landing Page',
   },
   {
-    title: 'API Toolkit',
-    desc: 'Clean FastAPI backend with JWT auth and MongoDB persistence.',
-    tag: 'Backend',
+    title: 'SecureNote',
+    desc: 'A web app demonstrating secure note-taking with basic encryption features and responsive design.',
+    tag: 'Web App',
   },
   {
-    title: 'Realtime Visualizer',
-    desc: 'WebGL visualizer with interaction-driven effects and audio hooks.',
-    tag: 'WebGL',
+    title: 'ByteBlog',
+    desc: 'A personal blog platform built with smooth navigation, dynamic content, and a sleek user interface.',
+    tag: 'Blog',
   },
 ];
 
@@ -31,7 +31,7 @@ export default function Projects() {
         </div>
 
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {demoProjects.map((p) => (
+          {projects.map((p) => (
             <article key={p.title} className="group relative overflow-hidden rounded-2xl border border-white/10 bg-gradient-to-b from-white/10 to-white/[0.04] p-6">
               <div className="absolute inset-0 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity" style={{
                 background: 'radial-gradient(60% 60% at 50% 10%, rgba(56,189,248,0.18), rgba(139,92,246,0.12), rgba(0,0,0,0))'

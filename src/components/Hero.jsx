@@ -49,7 +49,7 @@ export default function Hero() {
         className="absolute inset-0 will-change-transform"
       >
         <Spline
-          scene="https://prod.spline.design/z3DRq211g66TkBow/scene.splinecode"
+          scene="https://prod.spline.design/Gt5HUob8aGDxOUep/scene.splinecode"
           style={{ width: '100%', height: '100%' }}
         />
       </motion.div>
@@ -85,8 +85,8 @@ export default function Hero() {
         <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-white via-cyan-200 to-fuchsia-200 drop-shadow">
           Designer • Developer • Builder
         </h1>
-        <p className="mt-5 max-w-2xl text-zinc-200/90">
-          Crafting clean, responsive experiences. Background updated as requested — everything else stays yours.
+        <p className="mt-5 max-w-3xl text-zinc-200/90 text-lg">
+          Designing digital experiences that inspire, engage, and leave a lasting impression.
         </p>
         <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
           {/* Liquid glass buttons */}

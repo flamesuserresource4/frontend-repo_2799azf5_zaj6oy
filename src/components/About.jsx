@@ -8,8 +8,8 @@ export default function About() {
 
       <div className="relative mx-auto max-w-5xl px-6 py-20">
         <h2 className="text-3xl md:text-4xl font-bold text-white">About</h2>
-        <p className="mt-4 text-zinc-300/90">
-          I build polished, performant interfaces with a focus on detail and feel. This site keeps your original content and structure — with a refreshed, immersive background.
+        <p className="mt-4 text-zinc-300/90 text-base md:text-lg">
+          I’m Albin Eby. I’m passionate about technology, IT systems, and cybersecurity, but I also love editing and creating high-quality visuals. I enjoy solving problems, building digital projects, and making ideas come to life with clean, engaging design. I like combining technical skills with creativity to create work that’s both smart and visually interesting.
         </p>
         <ul className="mt-8 grid gap-4 sm:grid-cols-2">
           <li className="rounded-xl border border-white/10 bg-white/5 p-5">
