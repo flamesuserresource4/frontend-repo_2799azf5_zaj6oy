@@ -11,13 +11,30 @@ export default function Footer() {
           </div>
           <div className="md:col-span-2 flex md:justify-end">
             <div className="flex items-center gap-3">
-              <a href="mailto:hello@primexalbin.dev" className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-zinc-300 dark:border-zinc-700 hover:bg-white/70 dark:hover:bg-zinc-900/60 backdrop-blur" aria-label="Email">
+              {/* Liquid glass icon buttons */}
+              <a
+                href="mailto:hello@primexalbin.dev"
+                className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/20 bg-white/10 backdrop-blur-md text-zinc-900 dark:text-zinc-100 hover:bg-white/15 hover:border-white/30 transition [box-shadow:inset_0_1px_0_rgba(255,255,255,0.35),0_10px_30px_-10px_rgba(56,189,248,0.35)]"
+                aria-label="Email"
+              >
                 <Mail size={18} />
               </a>
-              <a href="https://github.com/" target="_blank" rel="noreferrer" className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-zinc-300 dark:border-zinc-700 hover:bg-white/70 dark:hover:bg-zinc-900/60 backdrop-blur" aria-label="GitHub">
+              <a
+                href="https://github.com/"
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/20 bg-white/10 backdrop-blur-md text-zinc-900 dark:text-zinc-100 hover:bg-white/15 hover:border-white/30 transition [box-shadow:inset_0_1px_0_rgba(255,255,255,0.32),0_10px_30px_-10px_rgba(147,51,234,0.35)]"
+                aria-label="GitHub"
+              >
                 <Github size={18} />
               </a>
-              <a href="https://www.linkedin.com/" target="_blank" rel="noreferrer" className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-zinc-300 dark:border-zinc-700 hover:bg-white/70 dark:hover:bg-zinc-900/60 backdrop-blur" aria-label="LinkedIn">
+              <a
+                href="https://www.linkedin.com/"
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/20 bg-white/10 backdrop-blur-md text-zinc-900 dark:text-zinc-100 hover:bg-white/15 hover:border-white/30 transition [box-shadow:inset_0_1px_0_rgba(255,255,255,0.30),0_10px_30px_-10px_rgba(99,102,241,0.35)]"
+                aria-label="LinkedIn"
+              >
                 <Linkedin size={18} />
               </a>
             </div>

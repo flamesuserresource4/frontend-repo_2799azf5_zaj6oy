@@ -2,19 +2,19 @@ import React from 'react';
 
 const demoProjects = [
   {
-    title: 'Holographic Grid Engine',
-    desc: 'Shader-driven grid with depth parallax and volumetric light layers.',
-    tag: 'WebGL / Shaders',
+    title: 'Portfolio Platform',
+    desc: 'Responsive, fast, and themed with liquid-glass UI accents.',
+    tag: 'Frontend',
   },
   {
-    title: 'Data Particle Trails',
-    desc: 'GPU-accelerated particle streaks that follow interaction velocity.',
-    tag: 'R3F / GPGPU',
+    title: 'API Toolkit',
+    desc: 'Clean FastAPI backend with JWT auth and MongoDB persistence.',
+    tag: 'Backend',
   },
   {
-    title: 'Emissive Node Network',
-    desc: 'Interactive cable mesh with pulse propagation and node glow.',
-    tag: 'Three.js',
+    title: 'Realtime Visualizer',
+    desc: 'WebGL visualizer with interaction-driven effects and audio hooks.',
+    tag: 'WebGL',
   },
 ];
 
@@ -27,7 +27,7 @@ export default function Projects() {
       <div className="mx-auto max-w-6xl px-6">
         <div className="mb-10 flex items-end justify-between">
           <h2 className="text-3xl md:text-4xl font-bold text-white">Featured Projects</h2>
-          <p className="text-sm text-zinc-400">Curated work aligned with the Neural Cyber Nexus aesthetic.</p>
+          <p className="text-sm text-zinc-400">A selection of recent work.</p>
         </div>
 
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
@@ -41,8 +41,9 @@ export default function Projects() {
                 <h3 className="mt-3 text-lg font-semibold text-white">{p.title}</h3>
                 <p className="mt-2 text-sm text-zinc-400">{p.desc}</p>
                 <div className="mt-5 flex items-center gap-3">
-                  <a href="#" className="text-cyan-300 hover:text-cyan-200">Live</a>
-                  <a href="#" className="text-zinc-400 hover:text-white">Code</a>
+                  {/* Liquid glass buttons */}
+                  <a href="#" className="relative inline-flex items-center rounded-full px-4 py-2 text-cyan-50/95 transition [box-shadow:inset_0_1px_0_rgba(255,255,255,0.35),0_10px_30px_-10px_rgba(56,189,248,0.45)] border border-white/20 bg-white/10 backdrop-blur-md hover:bg-white/15 hover:border-white/30">Live</a>
+                  <a href="#" className="relative inline-flex items-center rounded-full px-4 py-2 text-zinc-100 transition [box-shadow:inset_0_1px_0_rgba(255,255,255,0.30),0_10px_30px_-10px_rgba(147,51,234,0.40)] border border-white/15 bg-white/10 backdrop-blur-md hover:bg-white/15 hover:border-white/25">Code</a>
                 </div>
               </div>
             </article>

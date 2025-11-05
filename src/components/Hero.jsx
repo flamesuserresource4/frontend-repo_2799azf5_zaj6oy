@@ -38,7 +38,7 @@ export default function Hero() {
 
   return (
     <section ref={containerRef} className="relative h-screen w-full overflow-hidden bg-zinc-950 text-white">
-      {/* 3D Scene */}
+      {/* 3D Scene (Cover) */}
       <motion.div
         style={{
           rotateX,
@@ -49,16 +49,20 @@ export default function Hero() {
         className="absolute inset-0 will-change-transform"
       >
         <Spline
-          scene="https://prod.spline.design/EF7JOSsHLk16Tlw9/scene.splinecode"
+          scene="https://prod.spline.design/z3DRq211g66TkBow/scene.splinecode"
           style={{ width: '100%', height: '100%' }}
         />
       </motion.div>
 
       {/* Vignette + gradient overlays – non-blocking */}
-      <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-zinc-950/60 via-transparent to-zinc-950/70" />
-      <div className="pointer-events-none absolute inset-0" style={{
-        background: 'radial-gradient(60% 60% at 50% 40%, rgba(36, 99, 235, 0.20) 0%, rgba(139, 92, 246, 0.12) 35%, rgba(12, 10, 23, 0.0) 70%)'
-      }} />
+      <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-zinc-950/60 via-transparent to-zinc-950/80" />
+      <div
+        className="pointer-events-none absolute inset-0"
+        style={{
+          background:
+            'radial-gradient(60% 60% at 50% 40%, rgba(56,189,248,0.18) 0%, rgba(147,51,234,0.15) 35%, rgba(12,10,23,0.0) 70%)',
+        }}
+      />
 
       {/* Cursor hotspot glow */}
       <motion.div
@@ -70,23 +74,32 @@ export default function Hero() {
           width: hovering ? 420 : 280,
           height: hovering ? 420 : 280,
           background:
-            'radial-gradient(closest-side, rgba(56,189,248,0.28), rgba(147,51,234,0.17), rgba(0,0,0,0))',
+            'radial-gradient(closest-side, rgba(56,189,248,0.25), rgba(147,51,234,0.18), rgba(0,0,0,0))',
           transition: 'width 300ms ease, height 300ms ease',
         }}
       />
 
       {/* Content */}
       <div className="relative z-10 mx-auto flex h-full max-w-7xl flex-col items-center justify-center px-6 text-center">
-        <p className="mb-3 text-xs tracking-[0.25em] text-cyan-300/80 uppercase">Neural Cyber Nexus</p>
-        <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-cyan-300 via-sky-400 to-fuchsia-400 drop-shadow">Interactive 3D IT Background</h1>
-        <p className="mt-5 max-w-2xl text-zinc-300/90">
-          A living network sphere suspended in a cyber environment — responsive glow, parallax depth, and particle motion that follows your cursor.
+        <p className="mb-3 text-xs tracking-[0.25em] text-cyan-300/80 uppercase">PRIMExALBIN</p>
+        <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-white via-cyan-200 to-fuchsia-200 drop-shadow">
+          Designer • Developer • Builder
+        </h1>
+        <p className="mt-5 max-w-2xl text-zinc-200/90">
+          Crafting clean, responsive experiences. Background updated as requested — everything else stays yours.
         </p>
         <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
-          <a href="#projects" className="group relative inline-flex items-center gap-2 rounded-full border border-cyan-300/30 bg-cyan-400/10 px-5 py-2.5 text-cyan-200 hover:bg-cyan-400/20 transition">
+          {/* Liquid glass buttons */}
+          <a
+            href="#projects"
+            className="relative inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-cyan-50/95 transition [box-shadow:inset_0_1px_0_rgba(255,255,255,0.35),0_10px_30px_-10px_rgba(56,189,248,0.45)] border border-white/20 bg-white/10 backdrop-blur-md hover:bg-white/15 hover:border-white/30"
+          >
             Explore Projects
           </a>
-          <a href="#about" className="relative inline-flex items-center gap-2 rounded-full border border-zinc-700/60 bg-zinc-800/60 px-5 py-2.5 text-zinc-200 hover:bg-zinc-700/60 transition">
+          <a
+            href="#about"
+            className="relative inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-zinc-100 transition [box-shadow:inset_0_1px_0_rgba(255,255,255,0.30),0_10px_30px_-10px_rgba(147,51,234,0.40)] border border-white/15 bg-white/10 backdrop-blur-md hover:bg-white/15 hover:border-white/25"
+          >
             Learn More
           </a>
         </div>
