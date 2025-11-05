@@ -3,16 +3,12 @@ import Spline from '@splinetool/react-spline';
 import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion';
 
 export default function Hero() {
-  // Track pointer for glow hotspot and subtle parallax
+  // Track pointer only for the hotspot glow (scene itself stays locked)
   const [hovering, setHovering] = useState(false);
   const px = useMotionValue(0.5);
   const py = useMotionValue(0.5);
   const spx = useSpring(px, { stiffness: 120, damping: 20, mass: 0.5 });
   const spy = useSpring(py, { stiffness: 120, damping: 20, mass: 0.5 });
-  const rotateX = useTransform(spy, [0, 1], [8, -8]);
-  const rotateY = useTransform(spx, [0, 1], [-8, 8]);
-  const translateX = useTransform(spx, [0, 1], ['-1.5%', '1.5%']);
-  const translateY = useTransform(spy, [0, 1], ['-1.5%', '1.5%']);
 
   const containerRef = useRef(null);
 
@@ -38,21 +34,18 @@ export default function Hero() {
 
   return (
     <section ref={containerRef} className="relative h-screen w-full overflow-hidden bg-zinc-950 text-white">
-      {/* 3D Scene (Cover) */}
-      <motion.div
-        style={{
-          rotateX,
-          rotateY,
-          x: translateX,
-          y: translateY,
-        }}
-        className="absolute inset-0 will-change-transform"
-      >
+      {/* Attempt to hide Spline watermark overlay */}
+      <style>{`
+        .spline-watermark, .spline-logo, a[aria-label="Made with Spline"] { display: none !important; }
+      `}</style>
+
+      {/* 3D Scene (Cover) - locked (no parallax/rotation from our side) */}
+      <div className="absolute inset-0">
         <Spline
-          scene="https://prod.spline.design/Gt5HUob8aGDxOUep/scene.splinecode"
+          scene="https://prod.spline.design/zhZFnwyOYLgqlLWk/scene.splinecode"
           style={{ width: '100%', height: '100%' }}
         />
-      </motion.div>
+      </div>
 
       {/* Vignette + gradient overlays – non-blocking */}
       <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-zinc-950/60 via-transparent to-zinc-950/80" />
@@ -64,7 +57,7 @@ export default function Hero() {
         }}
       />
 
-      {/* Cursor hotspot glow */}
+      {/* Cursor hotspot glow (visual only) */}
       <motion.div
         aria-hidden
         className="pointer-events-none absolute -translate-x-1/2 -translate-y-1/2 rounded-full blur-3xl"
