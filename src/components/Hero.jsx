@@ -1,93 +1,99 @@
+import React, { useEffect, useRef, useState } from 'react';
 import Spline from '@splinetool/react-spline';
 import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion';
-import { useEffect } from 'react';
 
 export default function Hero() {
-  const mx = useMotionValue(0);
-  const my = useMotionValue(0);
-  const sx = useSpring(mx, { stiffness: 120, damping: 20, mass: 0.5 });
-  const sy = useSpring(my, { stiffness: 120, damping: 20, mass: 0.5 });
-  const rotateX = useTransform(sy, [-50, 50], [8, -8]);
-  const rotateY = useTransform(sx, [-50, 50], [-8, 8]);
+  // Track pointer for glow hotspot and subtle parallax
+  const [hovering, setHovering] = useState(false);
+  const px = useMotionValue(0.5);
+  const py = useMotionValue(0.5);
+  const spx = useSpring(px, { stiffness: 120, damping: 20, mass: 0.5 });
+  const spy = useSpring(py, { stiffness: 120, damping: 20, mass: 0.5 });
+  const rotateX = useTransform(spy, [0, 1], [8, -8]);
+  const rotateY = useTransform(spx, [0, 1], [-8, 8]);
+  const translateX = useTransform(spx, [0, 1], ['-1.5%', '1.5%']);
+  const translateY = useTransform(spy, [0, 1], ['-1.5%', '1.5%']);
+
+  const containerRef = useRef(null);
 
   useEffect(() => {
     const onMove = (e) => {
-      const { innerWidth, innerHeight } = window;
-      const x = (e.clientX / innerWidth) * 100 - 50;
-      const y = (e.clientY / innerHeight) * 100 - 50;
-      mx.set(x);
-      my.set(y);
+      const rect = containerRef.current?.getBoundingClientRect();
+      if (!rect) return;
+      const x = (e.clientX - rect.left) / rect.width;
+      const y = (e.clientY - rect.top) / rect.height;
+      px.set(x);
+      py.set(y);
     };
-    window.addEventListener('pointermove', onMove);
-    return () => window.removeEventListener('pointermove', onMove);
-  }, [mx, my]);
-
-  const scrollToProjects = () => {
-    const el = document.getElementById('projects');
-    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-  };
+    const el = containerRef.current;
+    el?.addEventListener('pointermove', onMove);
+    el?.addEventListener('pointerenter', () => setHovering(true));
+    el?.addEventListener('pointerleave', () => setHovering(false));
+    return () => {
+      el?.removeEventListener('pointermove', onMove);
+      el?.removeEventListener('pointerenter', () => setHovering(true));
+      el?.removeEventListener('pointerleave', () => setHovering(false));
+    };
+  }, [px, py]);
 
   return (
-    <section id="home" className="relative min-h-[90vh] lg:min-h-screen overflow-hidden">
-      {/* Interactive Spline background (purple/blue on dark) */}
-      <div className="absolute inset-0">
-        <Spline scene="https://prod.spline.design/wwTRdG1D9CkNs368/scene.splinecode" style={{ width: '100%', height: '100%' }} />
-      </div>
-
-      {/* Non-blocking gradient veil + vignette for depth */}
-      <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-zinc-950/70 via-zinc-950/10 to-zinc-950/90" />
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(70rem_35rem_at_50%_-10%,rgba(59,35,233,0.15),transparent)]" />
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(50rem_25rem_at_50%_110%,rgba(21,94,239,0.1),transparent)]" />
-
-      {/* Cursor-reactive glow hotspot (does not block interaction) */}
+    <section ref={containerRef} className="relative h-screen w-full overflow-hidden bg-zinc-950 text-white">
+      {/* 3D Scene */}
       <motion.div
-        aria-hidden
-        className="pointer-events-none absolute -inset-20"
-        style={{ x: sx, y: sy }}
+        style={{
+          rotateX,
+          rotateY,
+          x: translateX,
+          y: translateY,
+        }}
+        className="absolute inset-0 will-change-transform"
       >
-        <div className="h-[120vh] w-[120vw] rounded-full bg-[radial-gradient(closest-side,rgba(91,33,182,0.18),rgba(14,0,36,0.0))] blur-3xl" />
+        <Spline
+          scene="https://prod.spline.design/EF7JOSsHLk16Tlw9/scene.splinecode"
+          style={{ width: '100%', height: '100%' }}
+        />
       </motion.div>
 
+      {/* Vignette + gradient overlays – non-blocking */}
+      <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-zinc-950/60 via-transparent to-zinc-950/70" />
+      <div className="pointer-events-none absolute inset-0" style={{
+        background: 'radial-gradient(60% 60% at 50% 40%, rgba(36, 99, 235, 0.20) 0%, rgba(139, 92, 246, 0.12) 35%, rgba(12, 10, 23, 0.0) 70%)'
+      }} />
+
+      {/* Cursor hotspot glow */}
+      <motion.div
+        aria-hidden
+        className="pointer-events-none absolute -translate-x-1/2 -translate-y-1/2 rounded-full blur-3xl"
+        style={{
+          left: useTransform(spx, (v) => `calc(${v * 100}% )`),
+          top: useTransform(spy, (v) => `calc(${v * 100}% )`),
+          width: hovering ? 420 : 280,
+          height: hovering ? 420 : 280,
+          background:
+            'radial-gradient(closest-side, rgba(56,189,248,0.28), rgba(147,51,234,0.17), rgba(0,0,0,0))',
+          transition: 'width 300ms ease, height 300ms ease',
+        }}
+      />
+
       {/* Content */}
-      <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center pt-28 pb-16 lg:pt-40 lg:pb-32">
-          <motion.div
-            className="lg:col-span-7"
-            initial={{ opacity: 0, y: 24 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.85 }}
-            style={{ rotateX, rotateY }}
-          >
-            <span className="inline-flex items-center gap-2 rounded-full bg-white/10 px-3 py-1 text-xs font-medium shadow backdrop-blur">
-              <span className="h-2 w-2 rounded-full bg-emerald-400 animate-pulse" />
-              Open to opportunities
-            </span>
-            <h1 className="mt-5 text-4xl sm:text-6xl font-extrabold leading-tight tracking-tight">
-              PRIMExALBIN
-              <span className="block text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 via-fuchsia-400 to-emerald-300">Crafting modern, interactive experiences</span>
-            </h1>
-            <p className="mt-5 max-w-xl text-base sm:text-lg text-zinc-300">
-              I design and build premium web interfaces with performance, accessibility, and delightful motion at the core.
-            </p>
-            <div className="mt-8 flex flex-wrap items-center gap-3">
-              <button onClick={scrollToProjects} className="rounded-full bg-white text-black px-6 py-3 text-sm font-semibold shadow hover:shadow-lg transition [transform:translateZ(0)] hover:-translate-y-0.5">
-                View my projects
-              </button>
-              <a href="#contact" className="rounded-full border border-white/20 px-6 py-3 text-sm font-semibold backdrop-blur hover:bg-white/10 transition">
-                Contact me
-              </a>
-            </div>
-          </motion.div>
-          <motion.div
-            className="lg:col-span-5"
-            initial={{ opacity: 0, y: 12 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.9, delay: 0.15 }}
-          >
-            <div className="h-[36vh] lg:h-[58vh]" />
-          </motion.div>
+      <div className="relative z-10 mx-auto flex h-full max-w-7xl flex-col items-center justify-center px-6 text-center">
+        <p className="mb-3 text-xs tracking-[0.25em] text-cyan-300/80 uppercase">Neural Cyber Nexus</p>
+        <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-cyan-300 via-sky-400 to-fuchsia-400 drop-shadow">Interactive 3D IT Background</h1>
+        <p className="mt-5 max-w-2xl text-zinc-300/90">
+          A living network sphere suspended in a cyber environment — responsive glow, parallax depth, and particle motion that follows your cursor.
+        </p>
+        <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
+          <a href="#projects" className="group relative inline-flex items-center gap-2 rounded-full border border-cyan-300/30 bg-cyan-400/10 px-5 py-2.5 text-cyan-200 hover:bg-cyan-400/20 transition">
+            Explore Projects
+          </a>
+          <a href="#about" className="relative inline-flex items-center gap-2 rounded-full border border-zinc-700/60 bg-zinc-800/60 px-5 py-2.5 text-zinc-200 hover:bg-zinc-700/60 transition">
+            Learn More
+          </a>
         </div>
       </div>
+
+      {/* Bottom fade to blend into next section */}
+      <div className="pointer-events-none absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-b from-transparent to-zinc-950" />
     </section>
   );
 }

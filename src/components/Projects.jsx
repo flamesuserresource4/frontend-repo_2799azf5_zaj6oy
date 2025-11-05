@@ -1,118 +1,53 @@
-import { motion } from 'framer-motion';
-import { ExternalLink } from 'lucide-react';
+import React from 'react';
 
-const projects = [
+const demoProjects = [
   {
-    title: 'Neon Commerce',
-    desc: 'Headless e‑commerce storefront with blazing fast UX.',
-    tags: ['Next.js', 'Tailwind', 'Stripe'],
-    link: '#',
-    gradient: 'from-violet-500 via-indigo-500 to-blue-500',
+    title: 'Holographic Grid Engine',
+    desc: 'Shader-driven grid with depth parallax and volumetric light layers.',
+    tag: 'WebGL / Shaders',
   },
   {
-    title: 'Vision Studio',
-    desc: 'Interactive 3D portfolio with real‑time scenes.',
-    tags: ['React', 'Spline', 'Framer Motion'],
-    link: '#',
-    gradient: 'from-indigo-500 via-blue-500 to-cyan-500',
+    title: 'Data Particle Trails',
+    desc: 'GPU-accelerated particle streaks that follow interaction velocity.',
+    tag: 'R3F / GPGPU',
   },
   {
-    title: 'Pulse Dashboard',
-    desc: 'Analytics dashboard with live data and charts.',
-    tags: ['Vite', 'Recharts', 'Radix UI'],
-    link: '#',
-    gradient: 'from-fuchsia-500 via-purple-500 to-violet-500',
-  },
-  {
-    title: 'Atlas Docs',
-    desc: 'Developer docs with instant search and MDX.',
-    tags: ['Docusaurus', 'Algolia', 'MDX'],
-    link: '#',
-    gradient: 'from-violet-500 via-indigo-500 to-blue-500',
-  },
-  {
-    title: 'Nimbus UI',
-    desc: 'Component library with polished accessibility.',
-    tags: ['React', 'TypeScript', 'Storybook'],
-    link: '#',
-    gradient: 'from-sky-500 via-blue-500 to-indigo-600',
-  },
-  {
-    title: 'Flux App',
-    desc: 'Realtime collaboration app with presence.',
-    tags: ['Supabase', 'WebSockets', 'React'],
-    link: '#',
-    gradient: 'from-indigo-500 via-fuchsia-500 to-rose-500',
+    title: 'Emissive Node Network',
+    desc: 'Interactive cable mesh with pulse propagation and node glow.',
+    tag: 'Three.js',
   },
 ];
 
-const container = {
-  hidden: {},
-  show: {
-    transition: { staggerChildren: 0.08, delayChildren: 0.1 },
-  },
-};
-
-const item = {
-  hidden: { opacity: 0, y: 20, scale: 0.98 },
-  show: { opacity: 1, y: 0, scale: 1, transition: { type: 'spring', stiffness: 120, damping: 16 } },
-};
-
 export default function Projects() {
   return (
-    <section id="projects" className="relative py-24 sm:py-28">
-      {/* Section top fade for smooth transition from previous section */}
-      <div aria-hidden className="pointer-events-none absolute -top-16 left-0 right-0 h-16 bg-gradient-to-b from-transparent to-zinc-950/60" />
-      <div className="absolute inset-0 -z-0 pointer-events-none bg-[radial-gradient(40rem_20rem_at_50%_-10%,rgba(99,102,241,0.12),transparent)]" />
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 relative">
-        <div className="flex items-end justify-between gap-6">
-          <div>
-            <h2 className="text-3xl sm:text-4xl font-bold tracking-tight">Featured Projects</h2>
-            <p className="mt-2 text-zinc-600 dark:text-zinc-300 max-w-2xl">A selection of high‑impact builds blending aesthetics, performance, and interactivity.</p>
-          </div>
-          <a href="#contact" className="hidden sm:inline-flex rounded-full border border-zinc-300 dark:border-zinc-700 px-4 py-2 text-sm font-medium hover:bg-white/70 dark:hover:bg-zinc-900/60 backdrop-blur">Get in touch</a>
+    <section id="projects" className="relative bg-zinc-950 py-20">
+      {/* Top fade to blend from About */}
+      <div className="pointer-events-none absolute -top-16 left-0 right-0 h-16 bg-gradient-to-b from-transparent to-zinc-950/70" />
+
+      <div className="mx-auto max-w-6xl px-6">
+        <div className="mb-10 flex items-end justify-between">
+          <h2 className="text-3xl md:text-4xl font-bold text-white">Featured Projects</h2>
+          <p className="text-sm text-zinc-400">Curated work aligned with the Neural Cyber Nexus aesthetic.</p>
         </div>
 
-        <motion.div
-          variants={container}
-          initial="hidden"
-          whileInView="show"
-          viewport={{ once: true, amount: 0.15 }}
-          className="mt-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"
-        >
-          {projects.map((p) => (
-            <motion.a
-              key={p.title}
-              href={p.link}
-              target="_blank"
-              rel="noreferrer"
-              variants={item}
-              whileHover={{ y: -6, rotateX: 2, rotateY: -2 }}
-              whileTap={{ scale: 0.98 }}
-              className="group perspective-1000 relative overflow-hidden rounded-2xl border border-zinc-200 dark:border-zinc-800 bg-white/70 dark:bg-zinc-900/60 backdrop-blur shadow-sm transition will-change-transform"
-            >
-              <div className={`absolute -top-24 -right-24 h-56 w-56 rounded-full bg-gradient-to-br ${p.gradient} opacity-30 blur-3xl`} />
-              {/* Shine effect */}
-              <div className="pointer-events-none absolute inset-0 translate-x-[-200%] group-hover:translate-x-[200%] transition-transform duration-700">
-                <div className="h-full w-1/3 rotate-6 bg-gradient-to-r from-transparent via-white/50 to-transparent" />
-              </div>
-              <div className="p-6 relative">
-                <div className="flex items-center justify-between gap-4">
-                  <h3 className="text-xl font-semibold tracking-tight">{p.title}</h3>
-                  <span className="inline-flex h-9 w-9 items-center justify-center rounded-full bg-black text-white dark:bg-white dark:text-black shadow group-hover:scale-105 transition">
-                    <ExternalLink size={16} />
-                  </span>
-                </div>
-                <p className="mt-3 text-sm text-zinc-600 dark:text-zinc-300">{p.desc}</p>
-                <div className="mt-4 flex flex-wrap gap-2">
-                  {p.tags.map(t => (
-                    <span key={t} className="text-[11px] uppercase tracking-wide rounded-full border border-zinc-200 dark:border-zinc-800 px-2.5 py-1 text-zinc-700 dark:text-zinc-200 bg-white/60 dark:bg-zinc-900/50">{t}</span>
-                  ))}
+        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          {demoProjects.map((p) => (
+            <article key={p.title} className="group relative overflow-hidden rounded-2xl border border-white/10 bg-gradient-to-b from-white/10 to-white/[0.04] p-6">
+              <div className="absolute inset-0 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity" style={{
+                background: 'radial-gradient(60% 60% at 50% 10%, rgba(56,189,248,0.18), rgba(139,92,246,0.12), rgba(0,0,0,0))'
+              }} />
+              <div className="relative z-10">
+                <span className="inline-flex items-center rounded-full border border-cyan-300/30 bg-cyan-400/10 px-3 py-1 text-xs text-cyan-200">{p.tag}</span>
+                <h3 className="mt-3 text-lg font-semibold text-white">{p.title}</h3>
+                <p className="mt-2 text-sm text-zinc-400">{p.desc}</p>
+                <div className="mt-5 flex items-center gap-3">
+                  <a href="#" className="text-cyan-300 hover:text-cyan-200">Live</a>
+                  <a href="#" className="text-zinc-400 hover:text-white">Code</a>
                 </div>
               </div>
-            </motion.a>
+            </article>
           ))}
-        </motion.div>
+        </div>
       </div>
     </section>
   );
