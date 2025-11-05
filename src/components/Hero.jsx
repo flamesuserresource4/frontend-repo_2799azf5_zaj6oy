@@ -29,15 +29,17 @@ export default function Hero() {
 
   return (
     <section id="home" className="relative min-h-[90vh] lg:min-h-screen overflow-hidden">
-      {/* Interactive Spline as full-width cover */}
+      {/* Dark, futuristic Spline background */}
       <div className="absolute inset-0">
-        <Spline scene="https://prod.spline.design/zhZFnwyOYLgqlLWk/scene.splinecode" style={{ width: '100%', height: '100%' }} />
+        <Spline scene="https://prod.spline.design/t7ourXf4CdN9XTF3/scene.splinecode" style={{ width: '100%', height: '100%' }} />
       </div>
 
-      {/* Subtle gradient that doesn't block interactions */}
-      <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-white/70 via-white/10 to-white/90 dark:from-zinc-950/80 dark:via-zinc-950/20 dark:to-zinc-950/95" />
+      {/* Dark gradient veil that does not block interaction */}
+      <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-zinc-950/80 via-zinc-950/20 to-zinc-950/95" />
+      {/* Soft vignette for depth */}
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(60rem_30rem_at_50%_-10%,rgba(25,25,25,0.0),rgba(10,10,10,0.65))]" />
 
-      {/* Parallax title card with pointer-events passthrough, except CTAs */}
+      {/* Content */}
       <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center pt-28 pb-16 lg:pt-40 lg:pb-32">
           <motion.div
@@ -47,22 +49,22 @@ export default function Hero() {
             transition={{ duration: 0.85 }}
             style={{ rotateX, rotateY }}
           >
-            <span className="inline-flex items-center gap-2 rounded-full bg-white/70 dark:bg-zinc-900/60 px-3 py-1 text-xs font-medium shadow backdrop-blur">
+            <span className="inline-flex items-center gap-2 rounded-full bg-white/10 px-3 py-1 text-xs font-medium shadow backdrop-blur">
               <span className="h-2 w-2 rounded-full bg-emerald-400 animate-pulse" />
               Open to opportunities
             </span>
             <h1 className="mt-5 text-4xl sm:text-6xl font-extrabold leading-tight tracking-tight">
               PRIMExALBIN
-              <span className="block text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 via-fuchsia-500 to-emerald-400">Crafting modern, interactive experiences</span>
+              <span className="block text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 via-fuchsia-400 to-emerald-300">Crafting modern, interactive experiences</span>
             </h1>
-            <p className="mt-5 max-w-xl text-base sm:text-lg text-zinc-600 dark:text-zinc-300">
+            <p className="mt-5 max-w-xl text-base sm:text-lg text-zinc-300">
               I design and build premium web interfaces with performance, accessibility, and delightful motion at the core.
             </p>
             <div className="mt-8 flex flex-wrap items-center gap-3">
-              <button onClick={scrollToProjects} className="pointer-events-auto rounded-full bg-black text-white dark:bg-white dark:text-black px-6 py-3 text-sm font-semibold shadow hover:shadow-lg transition [transform:translateZ(0)] hover:-translate-y-0.5">
+              <button onClick={scrollToProjects} className="pointer-events-auto rounded-full bg-white text-black px-6 py-3 text-sm font-semibold shadow hover:shadow-lg transition [transform:translateZ(0)] hover:-translate-y-0.5">
                 View my projects
               </button>
-              <a href="#contact" className="pointer-events-auto rounded-full border border-zinc-300 dark:border-zinc-700 px-6 py-3 text-sm font-semibold backdrop-blur hover:bg-white/70 dark:hover:bg-zinc-900/60 transition">
+              <a href="#contact" className="pointer-events-auto rounded-full border border-white/20 px-6 py-3 text-sm font-semibold backdrop-blur hover:bg-white/10 transition">
                 Contact me
               </a>
             </div>
@@ -78,13 +80,13 @@ export default function Hero() {
         </div>
       </div>
 
-      {/* Floating accents following cursor lightly; do not block Spline */}
+      {/* Floating aurora accents that follow the cursor (non-interfering) */}
       <motion.div
         className="pointer-events-none absolute inset-x-0 top-24 h-48"
         style={{ x: sx, y: sy }}
       >
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 h-full">
-          <div className="h-full rounded-3xl bg-gradient-to-r from-indigo-500/10 via-fuchsia-500/10 to-emerald-400/10 blur-2xl" />
+          <div className="h-full rounded-3xl bg-gradient-to-r from-indigo-500/15 via-fuchsia-500/12 to-emerald-400/15 blur-2xl" />
         </div>
       </motion.div>
     </section>
